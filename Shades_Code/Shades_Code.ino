@@ -226,8 +226,8 @@ void ICACHE_RAM_ATTR nextEffect() {
 //if button 1 is also being held, turn effects on / off
 void ICACHE_RAM_ATTR effectRotaToggle() {
   if ( digitalRead(BUTTON_1) == LOW) {
-    effectsStop = !effectsStop;
     strip.pixelStripStopPattern = true;
+    effectsStop = !effectsStop;
   } else {
     effectRota = !effectRota;
   }
