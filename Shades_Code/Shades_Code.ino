@@ -37,11 +37,11 @@
 
 //effects control vars
 byte effectIndex = 0; //number of effect that's currently active
-const byte numEffects = 39; //number of current effects - 1
+const byte numEffects = 40; //number of current effects - 1
 boolean effectRota = true; //effects rotation on / off flag
 boolean effectsStop = false; //stop all effects flag
 boolean direct = true; //use for setting direction of effects
-boolean breakCurrentEffect = false; //flag for breaking out of effects that use multiple sub effects
+boolean breakCurrentEffect = false; //flag for breaking out of effects that use multiple sub effects / loops
 
 //macro for implementing break for effects with multiple sub effects
 #define breakEffectCheck() ({ \
@@ -91,13 +91,13 @@ const uint32_t violet =   strip.Color(238, 130, 238);
 const uint32_t purple =   strip.Color(123, 7, 197);
 const uint32_t pink =     strip.Color(225, 0, 127);
 
-const uint32_t rainbowdashBody = strip.Color(130, 185, 226); //178,231,254,
-const uint32_t rainbowdashHair1 = strip.Color(110, 46, 145); //purple
-const uint32_t rainbowdashHair2 = strip.Color(54, 174, 218); //teal
-const uint32_t rainbowdashHair3 = strip.Color(120, 212, 96); //green
-const uint32_t rainbowdashHair4 = strip.Color(255, 254, 188); //yellow
-const uint32_t rainbowdashHair5 = strip.Color(236, 116, 70); //orange
-const uint32_t rainbowdashHair6 = strip.Color(229, 61, 84); //pink red
+const uint32_t pastelRainbow = strip.Color(130, 185, 226); //178,231,254,
+const uint32_t pastelRainbow1 = strip.Color(110, 46, 145); //purple
+const uint32_t pastelRainbow2 = strip.Color(54, 174, 218); //teal
+const uint32_t pastelRainbow3 = strip.Color(120, 212, 96); //green
+const uint32_t pastelRainbow4 = strip.Color(255, 254, 188); //yellow
+const uint32_t pastelRainbow5 = strip.Color(236, 116, 70); //orange
+const uint32_t pastelRainbow6 = strip.Color(229, 61, 84); //pink red
 
 //define pallet array, contains 32bit representations of all colors used in patterns
 uint32_t pallet[9] = { off, white, UCLAGold, UCLABlue, blue, yellow, red, green, purple };
@@ -106,8 +106,8 @@ uint32_t pallet[9] = { off, white, UCLAGold, UCLABlue, blue, yellow, red, green,
 //pallet to match typical fairy light colors
 uint32_t christmasPallet[5] = { red, blue, green, yellow, purple };
 
-uint32_t rainbowdashPallet[] = { rainbowdashBody, rainbowdashHair1 , rainbowdashHair2, rainbowdashHair3, rainbowdashHair4, rainbowdashHair5, rainbowdashHair6 };
-byte rainbowdashPattern2[] = {  6, 1, 2, 5, 4, 3, 0 };
+uint32_t pastelRainbowPallet[] = { pastelRainbow, pastelRainbow1 , pastelRainbow2, pastelRainbow3, pastelRainbow4, pastelRainbow5, pastelRainbow6 };
+byte pastelRainbowPattern[] = {  6, 1, 2, 5, 4, 3, 0 };
 
 //byte wavepattern[]  = { 6, 1 };
 //byte wavepattern2[] = { 5, 4 };
@@ -303,43 +303,43 @@ void loop() {
     //these will contain breakEffectCheck(); which will breakout of the case if the effect is skipped by button input
     //segmentName.flipSegDirectionEvery(1, true) means that the direction of the names segments will be reversed
     //this is used to change the direction of colorSpin effects
-    
+   
     switch (effectIndex) { //select the next effect based on the effectIndex
       case 0:
-        strip.segGradientCycle(columnSegments, rainbowdashPattern2, SIZE(rainbowdashPattern2), rainbowdashPallet, SIZE( rainbowdashPallet ), 5, 100, true, 120);
+        strip.segGradientCycle(columnSegments, pastelRainbowPattern, SIZE(pastelRainbowPattern), pastelRainbowPallet, SIZE( pastelRainbowPallet ), 5, 100, true, 120);
         break;
       case 1:
         strip.rainbowCycle(20, 3);
         break;
       case 2:
         strip.genRandPallet( tempRandPallet, SIZE(tempRandPallet) );
-        strip.randomColorSet(off, true, tempRandPallet, SIZE(tempRandPallet), 100, 5, 15000);
+        strip.randomColorSet(off, true, tempRandPallet, SIZE(tempRandPallet), 100, 5, 12000);
         break;
       case 3:
-        strip.randomColorSet(off, true, christmasPallet, SIZE(christmasPallet), 100, 5, 15000);
+        strip.randomColorSet(off, true, christmasPallet, SIZE(christmasPallet), 100, 5, 12000);
         break;
       case 4:
-        strip.shooterSeg( columnSegments, pallet, 3, 0, 8, 1, 1, 2, 4, true, false, 70, 100);
+        strip.shooterSeg( columnSegments, pallet, 3, 0, 8, 1, 1, 2, 4, true, false, 70, 150);
         break;
       case 5:
-        strip.shooterSeg( lenseSegments, pallet, 4, 0, 5, 4, 1, 3, 4, true, false, 70, 100);
+        strip.shooterSeg( lenseSegments, pallet, 4, 0, 10, 4, 1, 3, 4, true, false, 70, 150);
         break;
       case 6:
-        strip.shooterSeg( rowHalvesSegments, pallet, 3, 0, 10, 1, 1, 3, 4, true, false, 65, 100);
+        strip.shooterSeg( rowHalvesSegments, pallet, 3, 0, 10, 1, 1, 3, 4, true, false, 65, 150);
         break;
       case 7:
-        strip.shooterSeg( rowHalvesSegments, pallet, 3, 0, 10, 1, 1, 2, 2, true, false, 65, 100);
+        strip.shooterSeg( rowHalvesSegments, pallet, 3, 0, 10, 1, 1, 2, 2, true, false, 65, 150);
         break;
       case 8:
         strip.sparkSeg( rowLenseSegments, 10, 1, 1, 0, 2, 0, 1, false, 100, 80 ); //segmented rainbow sparks, blank Bg
         break;
       case 9:
-        strip.sparkSeg( rowLenseSegments, 20, 1, 1, white, 1, 0, 5, false, 200, 80 ); //radial rainbow Bg, white sparks
+        strip.sparkSeg( rowLenseSegments, 20, 1, 1, white, 1, 0, 5, false, 150, 80 ); //radial rainbow Bg, white sparks
         break;
       case 10:
         for (int i = 0; i < 2; i++) {
           breakEffectCheck();
-          strip.segGradientCycleRand(columnSegments, 3, 7, 200, direct, 1, 80);
+          strip.segGradientCycleRand(columnSegments, 3, 7, 150, direct, 1, 80);
           direct = !direct;
         }
         break;
@@ -349,7 +349,7 @@ void loop() {
       case 12:
         for (int i = 0; i < 2; i++) {
           breakEffectCheck();
-          strip.segGradientCycleRand(rowSegments, 3 , 5, 200, direct, 1, 100);
+          strip.segGradientCycleRand(rowSegments, 3 , 5, 150, direct, 1, 100);
           direct = !direct;
         }
         break;
@@ -411,13 +411,13 @@ void loop() {
         strip.colorSpin( rowLenseSegments, spinPatternStGeorgeCross, SIZE(spinPatternStGeorgeCross), pallet, 0, 1, false, 100, 100 );
         break;
       case 21:
-        strip.colorSpinSimple( lenseSegments, 5, 0, 0, 4, -1, 4, 0, 1, 24 * 7, 80 );
+        strip.colorSpinSimple( lenseSegments, 5, 0, 0, 4, -1, 4, 0, 1, 170, 80 );
         break;
       case 22:
-        strip.colorSpinSimple( lenseSegments, 3, 0, 0, 7, -1, 7, 0, 1, 24 * 7, 60 );
+        strip.colorSpinSimple( lenseSegments, 3, 0, 0, 7, -1, 7, 0, 1, 170, 60 );
         break;
       case 23:
-        strip.colorSpinSimple( lenseSegments, 1, 0, 0, 7, 3, 7, 0, 2, 24 * 7, 60 );
+        strip.colorSpinSimple( lenseSegments, 1, 0, 0, 7, 3, 7, 0, 2, 170, 60 );
         break;
       case 24:
         strip.segGradientCycleRand(lenseSegments, 4, 7, 200, false, 2, 80);
@@ -426,19 +426,19 @@ void loop() {
         strip.patternSweepRand( 12, white, -1, 0, 0, true, 0, 1, 60, 320 );
         break;
       case 26:
-        strip.simpleStreamerRand( 5, 0, 7, 0, 0, true, 100, 70);
+        strip.simpleStreamerRand( 5, 0, 7, 0, 0, true, 130, 70);
         break;
       case 27:
-        strip.gradientCycleRand( 4, 8, 24 * 7, true, 90);
+        strip.gradientCycleRand( 4, 8, 170, true, 90);
         break;
       case 28:
-        strip.colorSpinSimple( rowLenseSegments, 1, 0, 0, 7, 1, 0, 0, 2, 24 * 5, 60 ); //rainbow half
+        strip.colorSpinSimple( rowLenseSegments, 1, 0, 0, 7, 1, 0, 0, 2, 170, 60 ); //rainbow half
         break;
       case 29:
-        strip.colorSpinSimple( rowLensesHalvesSegments, 1, 0, 0, 3, 1, 0, 0, 2, 24 * 5, 70 );
+        strip.colorSpinSimple( rowLensesHalvesSegments, 1, 0, 0, 3, 1, 0, 0, 2, 170, 70 );
         break;
       case 30:
-      //twinkle four times, each with a different pair of colors
+        //twinkle four times, each with a different pair of colors
         for (int i = 0; i < 4; i++) {
           if (i == 0) {
             tempTwinklePallet[0] = red;
@@ -461,7 +461,7 @@ void loop() {
         strip.twinkleSet(0, christmasPallet, SIZE(christmasPallet), 2, 60, 15, 10000);
         break;
       case 32:
-      //rainbow() only does one full cycle, we'll do 3 to extend its duration
+        //rainbow() only does one full cycle, we'll do 3 to extend its duration
         for (int i = 0; i < 3; i++) {
           breakEffectCheck();
           strip.rainbow(35);
@@ -470,36 +470,41 @@ void loop() {
       case 33:
         for (int i = 0; i < 3; i++) {
           breakEffectCheck();
-          strip.patternSweepRand( 4, -1, 0, 1, 5, true, 0, 1, 60, 24 * 8 );
+          strip.patternSweepRand( 4, -1, 0, 1, 5, true, 0, 1, 60, 200 );
         }
         break;
       case 34:
         for (int i = 0; i < 2; i++) {
           breakEffectCheck();
-          strip.patternSweepRainbowRand( 2, 0, 1, 8, true, 0, 60, 24 * 8);
+          strip.patternSweepRainbowRand( 2, 0, 1, 8, true, 0, 60, 200);
         }
         break;
       case 35:
-        strip.colorSpinSimple( rowLenseSegments, 1, white, -1, 1, -1, 4, 0, 1, 24 * 7, 100 ); //white strips on rainbow Bg
+        //strip.colorSpinSimple( rowLenseSegments, 1, white, -1, 1, -1, 4, 0, 1, 24 * 7, 100 ); //white strips on rainbow Bg
+        strip.colorSpinSimple( rowLensesHalvesSegments, 1, white, -1, 1, -1, 5, 0, 1, 24 * 7, 100 ); //white strips on rainbow Bg
         break;
       case 36:
-        for (int i = 0; i < 4; i++) {
-          tempRandPallet[0] = RC();
-          for (int j = 0; j < 2; j++) {
-            breakEffectCheck();
-            strip.singleWave( columnSegments, tempRandPallet[0], 0, 1, columnSegments.numSegs - 1, direct, 3, 20);
-            direct = !direct;
+        //vertical single waves
+        for (int i = 0; i < 6; i++) {
+          //we want the wave color to be the only change once the wave has gone back and forth once
+          if (i % 2 == 0) {
+            tempRandPallet[0] = RC();
           }
+          breakEffectCheck();
+          strip.singleWave( columnSegments, tempRandPallet[0], 0, 1, columnSegments.numSegs - 1, direct, 3, 20);
+          direct = !direct;
         }
         break;
       case 37:
-        for (int i = 0; i < 4; i++) {
-          tempRandPallet[0] = RC();
-          for (int j = 0; j < 2; j++) {
-            breakEffectCheck();
-            strip.singleWave( rowSegments, tempRandPallet[0], 0, 1, rowSegments.numSegs - 1, direct, 10, 20);
-            direct = !direct;
+        //horizontal single waves
+        for (int i = 0; i < 8; i++) {
+          //we want the wave color to be the only change once the wave has gone back and forth once
+          if (i % 2 == 0) {
+            tempRandPallet[0] = RC();
           }
+          breakEffectCheck();
+          strip.singleWave( rowSegments, tempRandPallet[0], 0, 1, rowSegments.numSegs - 1, direct, 10, 20);
+          direct = !direct;
         }
         break;
       case 38:
@@ -508,7 +513,7 @@ void loop() {
       case 39:
         for (int i = 0; i < 3; i++) {
           breakEffectCheck();
-          strip.patternSweepRepeatRand(3, 0, 0, 2, 3, false, false, 0, 0, 1, 70, 200 );
+          strip.patternSweepRepeatRand(3, 0, 0, 2, 3, false, false, 0, 0, 1, 70, 100 );
         }
         break;
       default:
