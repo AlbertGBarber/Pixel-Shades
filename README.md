@@ -5,4 +5,4 @@
  
  You can find the PCBs here https://easyeda.com/splat238/ws2812-shutter-shades_copy
  
-https://www.digikey.com/BOM/Create/CreateSharedBom?bomId=8042503
+See build details here: https://www.instructables.com/id/RGB-LED-Pixel-Shades
