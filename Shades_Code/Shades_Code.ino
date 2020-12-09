@@ -319,22 +319,22 @@ void loop() {
         strip.randomColorSet(off, true, christmasPallet, SIZE(christmasPallet), 100, 5, 12000);
         break;
       case 4:
-        strip.shooterSeg( columnSegments, pallet, 3, 0, 8, 1, 1, 2, 4, true, false, 70, 150);
+        strip.shooterSeg( columnSegments, pallet, 3, 0, true, 8, 1, 1, 2, 4, true, false, 70, 150);
         break;
       case 5:
-        strip.shooterSeg( lenseSegments, pallet, 4, 0, 10, 4, 1, 3, 4, true, false, 70, 150);
+        strip.shooterSeg( lenseSegments, pallet, 4, 0, true, 10, 4, 1, 3, 4, true, false, 70, 150);
         break;
       case 6:
-        strip.shooterSeg( rowHalvesSegments, pallet, 3, 0, 10, 1, 1, 3, 4, true, false, 65, 150);
+        strip.shooterSeg( rowHalvesSegments, pallet, 3, 0, true, 10, 1, 1, 3, 4, true, false, 65, 150);
         break;
       case 7:
-        strip.shooterSeg( rowHalvesSegments, pallet, 3, 0, 10, 1, 1, 2, 2, true, false, 65, 150);
+        strip.shooterSeg( rowHalvesSegments, pallet, 3, 0, true, 10, 1, 1, 2, 2, true, false, 65, 150);
         break;
       case 8:
-        strip.sparkSeg( rowLenseSegments, 10, 1, 1, 0, 2, 0, 1, false, 100, 80 ); //segmented rainbow sparks, blank Bg
+        strip.sparkSeg( rowLenseSegments, 10, 1, 1, 0, 2, 0, 1, true, false, 100, 80 ); //segmented rainbow sparks, blank Bg
         break;
       case 9:
-        strip.sparkSeg( rowLenseSegments, 20, 1, 1, white, 1, 0, 5, false, 150, 80 ); //radial rainbow Bg, white sparks
+        strip.sparkSeg( rowLenseSegments, 20, 1, 1, white, 1, 0, 5, false, false, 150, 80 ); //radial rainbow Bg, white sparks
         break;
       case 10:
         for (int i = 0; i < 2; i++) {
