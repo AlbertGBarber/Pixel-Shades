@@ -79,7 +79,6 @@ PixelStrip strip = PixelStrip(stripLength, PIXEL_PIN, stripType);
 const uint32_t white =    strip.Color(255, 255, 255);
 const uint32_t off =      strip.Color( 0, 0, 0 );
 
-const uint32_t purple =   strip.Color(123, 7, 197);
 const uint32_t orangeHalwen = strip.Color(250, 65, 19); //strip.Color(253,119,8);
 const uint32_t yellowHalwen = strip.Color(253, 229, 0);
 const uint32_t greenHalwen = strip.Color( 43, 208, 17 );
@@ -372,7 +371,7 @@ void loop() {
       case 12:
         for (int i = 0; i < 2; i++) {
           breakEffectCheck();
-          strip.segGradientCycleRand(rowSegments, 3 , 5, 100, direct, 1, 100);
+          strip.segGradientCycleRand(rowSegments, 3, 5, 100, direct, 1, 100);
           direct = !direct;
         }
         break;
